@@ -19,56 +19,64 @@ const LinkPreviewer = ({ url, children }) => {
   });
 
   const [isMounted, setIsMounted] = useState(false);
-  const [show, setShow] = useState(null);
+  const [show, setShow] = useState(false);
+  const [position, setPosition] = useState({ top: 0, left: 0 });
 
   useEffect(() => {
     setIsMounted(true);
   }, []);
 
+  const handleMouseMove = (e) => {
+    setPosition({
+      top: e.clientY - 150, // Adjust to position the preview just above the cursor
+      left: e.clientX + 10, // Adjust to position it slightly to the right
+    });
+  };
+
   const src = `https://api.microlink.io/?${params}`;
 
   const dropIn = {
-    hidden: {
-      y: "-10vh",
-      opacity: 0,
-    },
+    hidden: { opacity: 0, y: 10 },
     visible: {
-      y: 0,
       opacity: 1,
-      transition: {
-        duration: 0.1,
-        type: "spring",
-        damping: 25,
-        stiffness: 500,
-      },
+      y: 0,
+      transition: { duration: 0.2, type: "spring", damping: 20, stiffness: 300 },
     },
-    exit: {
-      y: "-100vh",
-      opacity: 0,
-    },
+    exit: { opacity: 0, y: 10 },
   };
 
   return (
     <div style={{ position: "relative", display: "inline-block" }}>
-      {isMounted && show ? (
+      {isMounted && show && (
         <motion.div
           variants={dropIn}
-          animate="visible"
           initial="hidden"
+          animate="visible"
           exit="exit"
           style={{
-            position: "absolute",
-            top: "150px",
-            left: "-60px",
-            right: "0",
+            position: "fixed",
+            top: position.top,
+            left: position.left,
             zIndex: 10,
             backgroundColor: "transparent",
+            pointerEvents: "none",
           }}
         >
-          <motion.img className="image" src={src} width={width} height={height} />
+          <motion.img src={src} width={width} height={height} alt="Link Preview" />
         </motion.div>
-      ) : null}
-      <a href={url} target="_blank" className="pointer" onMouseEnter={() => setShow(true)} onMouseLeave={() => setShow(false)}>
+      )}
+      <a
+        href={url}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="pointer"
+        onMouseEnter={(e) => {
+          setShow(true);
+          handleMouseMove(e);
+        }}
+        onMouseMove={handleMouseMove}
+        onMouseLeave={() => setShow(false)}
+      >
         {children}
       </a>
     </div>
