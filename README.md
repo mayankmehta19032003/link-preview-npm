@@ -26,17 +26,11 @@ import LinkPreviewer from "quick-link-preview";
 function App() {
   return (
     <div className="container">
+
       <LinkPreviewer url="https://en.wikipedia.org/wiki/Main_Page">
-        <span className='link'>Wikipedia</span>
+        <span>Wikipedia</span>
       </LinkPreviewer>
-      
-      <LinkPreviewer url="https://mayankmehta.vercel.app/">
-        <span className='link'>Portfolio</span>
-      </LinkPreviewer>
-      
-      <LinkPreviewer url="https://github.com/mayankmehta19032003/Postify">
-        <span className='link'>GitHub</span>
-      </LinkPreviewer>
+
     </div>
   );
 }
