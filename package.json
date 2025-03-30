@@ -1,0 +1,41 @@
+{
+  "name": "quick-link-preview",
+  "version": "1.0.4",
+  "description": "A React component that previews links on hover.",
+  "main": "dist/index.js",
+  "module": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "dependencies": {
+    "framer-motion": "^10.0.0",
+    "qss": "^2.0.0"
+  },
+  "peerDependencies": {
+    "react": "^18.0.0 || ^19.0.0",
+    "react-dom": "^18.0.0 || ^19.0.0"
+  },
+  "scripts": {
+    "build": "babel src --out-dir dist --copy-files",
+    "prepare": "npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/YOUR_GITHUB_USERNAME/link-previewer"
+  },
+  "keywords": [
+    "react",
+    "link preview",
+    "previewer",
+    "npm"
+  ],
+  "author": "Your Name",
+  "license": "MIT",
+  "devDependencies": {
+    "@babel/cli": "^7.27.0",
+    "@babel/preset-env": "^7.26.9",
+    "@babel/preset-react": "^7.26.3",
+    "babel-loader": "^10.0.0"
+  }
+}
